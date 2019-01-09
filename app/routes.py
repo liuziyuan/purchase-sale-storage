@@ -1,5 +1,5 @@
 from flask_restful import Api
-from app.resources.hello_world import HelloWorld
+from app.resources.test_resource import TestResource
 
 api = Api()
-api.add_resource(HelloWorld, '/')
+api.add_resource(TestResource, '/')
