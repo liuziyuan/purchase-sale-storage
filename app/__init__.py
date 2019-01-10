@@ -1,6 +1,15 @@
 from app.routes import api
 
 class App(object):
+    """
+    The main entry point for the application.
+    You need to initialize it with a Flask Application::
+    Examples::
+            my_app = App()
+            api.init_app(app)
+    Or::
+            App(app)        
+    """
     def __init__(self, app=None):
         self.app = None
         if app is not None:
