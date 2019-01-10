@@ -1,2 +1,3 @@
 from .base import *
-from .user import *  # noqa
+from .user import *
+from .role import *
