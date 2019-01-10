@@ -1,2 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+from config.initializers.database import db
+
+'''
+you could setup db from SQLAlchemy object
+'''
