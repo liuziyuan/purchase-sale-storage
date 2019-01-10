@@ -19,7 +19,7 @@ class reset(Command):
 class test(Command):  
     'test'  
     def run(self):  
-        print('test hello world')
+        print('hello, this is test of dbset command moudle')
 
 
 command.add_command('test', test)
