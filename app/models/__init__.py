@@ -1,1 +1,2 @@
-from .test import *  # noqa
+from .base import *
+from .user import *  # noqa
