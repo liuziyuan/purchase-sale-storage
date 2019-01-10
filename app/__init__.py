@@ -1,5 +1,12 @@
-from flask import Flask
 from app.routes import api
-app = Flask(__name__)
-api.init_app(app)
+
+class App(object):
+    def __init__(self, app=None):
+        self.app = None
+        if app is not None:
+            self.app = app
+            self.init_app(app)
+
+    def init_app(self, app):
+        api.init_app(app)
 
