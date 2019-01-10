@@ -2,8 +2,7 @@ from flask import Flask
 from flask_script import Manager, prompt_bool, Command
 from flask_migrate import Migrate, MigrateCommand
 from app import App
-from config.database import db
-from config.initializers.database import command
+from config.initializers.database import db, command
 from app.models import *
 
 app = Flask(__name__)
