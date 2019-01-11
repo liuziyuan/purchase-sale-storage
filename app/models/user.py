@@ -1,12 +1,12 @@
 from . import db
-from .base import Base
+from .base import TimestampMixin
 
 user_roles = db.Table('user_roles',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('role_id', db.Integer, db.ForeignKey('role.id'), primary_key=True)
 )
 
-class User(Base):
+class User(TimestampMixin, db.Model):
     name = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     sign_in_count = db.Column(db.Integer, default=0)
@@ -20,6 +20,11 @@ class User(Base):
     @staticmethod
     def create(user):
         db.session.add(user)
+        db.session.commit()
+    
+    @classmethod
+    def save(self):
+        db.session.add(self)
         db.session.commit()
 
 

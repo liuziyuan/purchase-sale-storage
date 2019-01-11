@@ -1,7 +1,7 @@
 from . import db
-from .base import Base
+from .base import TimestampMixin
 
-class Role(Base):
+class Role(TimestampMixin, db.Model):
     name = db.Column(db.String(80), unique=True, nullable=False)
 
     def __init__(self, **kwargs):
