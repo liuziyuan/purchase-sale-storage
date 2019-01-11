@@ -1,15 +1,10 @@
 from flask_restful import reqparse, abort, Api, Resource, fields, marshal_with
 from app.models.user import User
 
-TODOS = {
-    'todo1': {'task': 'build an API'},
-    'todo2': {'task': '?????'},
-    'todo3': {'task': 'profit!'},
-}
 
-def abort_if_todo_doesnt_exist(todo_id):
-    if todo_id not in TODOS:
-        abort(404, message="Todo {} doesn't exist".format(todo_id))
+def abort_if_user_doesnt_exist(user, user_id):
+    if user is None:
+        abort(404, message="User {} doesn't exist".format(user_id))
 
 fields = {
     'name': fields.String,
@@ -26,10 +21,12 @@ class UserResource(Resource):
     @marshal_with(fields)
     def get(self, user_id):
         user = User().get_by_id(user_id)
+        abort_if_user_doesnt_exist(user, user_id)
         return user
 
     def delete(self, user_id):
         user = User().get_by_id(user_id)
+        abort_if_user_doesnt_exist(user, user_id)
         user.delete()
         return '', 204
 
