@@ -45,7 +45,8 @@ class UserResource(Resource):
         password=args['password'], 
         sign_in_count=0)
         # user.save()
-        User.create(user)
+        user.save()
+        # User.create(user)
         return user, 201
         # todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
         # todo_id = 'todo%i' % todo_id
