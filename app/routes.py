@@ -4,4 +4,4 @@ from app.resources.user import UserResource, UserListResources
 api = Api()
 
 api.add_resource(UserListResources, '/users')
-api.add_resource(UserResource, '/users','/users/<todo_id>')
+api.add_resource(UserResource, '/users','/users/<user_id>')

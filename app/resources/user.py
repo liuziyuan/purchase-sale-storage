@@ -23,20 +23,25 @@ parser.add_argument('password', type=str, required=True, help="Password cannot b
 
 class UserResource(Resource):
 
-    def get(self, todo_id):
-        abort_if_todo_doesnt_exist(todo_id)
-        return TODOS[todo_id]
+    @marshal_with(fields)
+    def get(self, user_id):
+        user = User().get_by_id(user_id)
+        return user
 
-    def delete(self, todo_id):
-        abort_if_todo_doesnt_exist(todo_id)
-        del TODOS[todo_id]
+    def delete(self, user_id):
+        user = User().get_by_id(user_id)
+        user.delete()
         return '', 204
 
-    def put(self, todo_id):
+    @marshal_with(fields)
+    def put(self, user_id):
         args = parser.parse_args()
-        task = {'task': args['task']}
-        TODOS[todo_id] = task
-        return task, 201
+        user = User().get_by_id(user_id)
+        user.name = args['name']
+        user.password = args['password']
+        user.update()
+        # TODOS[todo_id] = task
+        return user, 201
     
     @marshal_with(fields)
     def post(self):
@@ -50,7 +55,9 @@ class UserResource(Resource):
         return user, 201
     
 class UserListResources(Resource):
+
+    @marshal_with(fields)
     def get(self):
-        return User.all()
+        return User().all()
     
 
