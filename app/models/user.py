@@ -17,14 +17,24 @@ class User(TimestampMixin, db.Model):
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
 
+    
+
     def save(self):
         db.session.add(self)
+        db.session.commit()
+    
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
 
     @staticmethod
     def create(user):
         db.session.add(user)
         db.session.commit()
+        
+    @staticmethod
+    def all():
+        return User.query.all()
 
 
 

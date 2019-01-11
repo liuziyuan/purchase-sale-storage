@@ -48,13 +48,9 @@ class UserResource(Resource):
         user.save()
         # User.create(user)
         return user, 201
-        # todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
-        # todo_id = 'todo%i' % todo_id
-        # TODOS[todo_id] = {'task': args['task']}
-        # return TODOS[todo_id], 201
     
 class UserListResources(Resource):
     def get(self):
-        return TODOS
+        return User.all()
     
 
