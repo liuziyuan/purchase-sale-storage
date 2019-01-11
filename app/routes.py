@@ -1,5 +1,7 @@
 from flask_restful import Api
-from app.resources.test_resource import TestResource
+from app.resources.user import UserResource, UserListResources
 
 api = Api()
-api.add_resource(TestResource, '/')
+
+api.add_resource(UserListResources, '/users')
+api.add_resource(UserResource, '/users','/users/<todo_id>')

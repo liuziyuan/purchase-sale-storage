@@ -1,4 +1,4 @@
-from app import db
+from . import db
 from .base import Base
 
 user_roles = db.Table('user_roles',
@@ -13,5 +13,13 @@ class User(Base):
 
     roles = db.relationship('Role', secondary=user_roles, lazy='subquery',
         backref=db.backref('users', lazy=True))
+
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+
+    @staticmethod
+    def create(user):
+        db.session.add(user)
+        db.session.commit()
 
 

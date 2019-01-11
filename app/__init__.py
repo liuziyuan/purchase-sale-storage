@@ -1,5 +1,5 @@
 from app.routes import api
-from config.initializers.database import db
+
 
 class App(object):
     """
