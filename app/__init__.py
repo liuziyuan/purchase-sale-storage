@@ -1,4 +1,4 @@
-from app.routes import api
+from app.route import api
 
 
 class App(object):

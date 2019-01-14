@@ -2,11 +2,12 @@ from . import db
 from .base import TimestampMixin
 
 user_roles = db.Table('user_roles',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-    db.Column('role_id', db.Integer, db.ForeignKey('role.id'), primary_key=True)
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('role_id', db.Integer, db.ForeignKey('roles.id'), primary_key=True)
 )
 
 class User(TimestampMixin, db.Model):
+    __tablename__ = 'users'
     name = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     sign_in_count = db.Column(db.Integer, default=0)
