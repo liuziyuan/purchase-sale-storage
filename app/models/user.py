@@ -11,6 +11,7 @@ class User(TimestampMixin, db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     sign_in_count = db.Column(db.Integer, default=0)
+    name = db.Column(db.String(30))
 
     roles = db.relationship('Role', secondary=user_roles, lazy='subquery',
         backref=db.backref('users', lazy=True))
