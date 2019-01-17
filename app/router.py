@@ -10,7 +10,7 @@ def get_url(part_url='', version=''):
 
 api.add_resource(UserListResources, get_url(part_url='/users'))
 api.add_resource(UserResource, get_url(part_url='/users'), get_url(part_url='/users/<user_id>'))
-api.add_resource(SessionResources, get_url(part_url='/sessions'), get_url(part_url='/sessions/<user_id>'))
+api.add_resource(SessionResources, get_url(part_url='/sessions'))
 
 # api.add_resource(UserListResources, '/users')
 # api.add_resource(UserResource, '/users','/users/<user_id>')
