@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_script import Manager, prompt_bool, Command
-from flask_migrate import Migrate, MigrateCommand
-from flask_cors import CORS
-from app import App
-from config.initializers.database import db, command
+from flask_migrate import MigrateCommand
+
+from config.initializers.cors import cors
+from config.initializers.db import db, command
+from config.initializers.db_migrate import migrate
 from config.initializers.jwt import jwt
+from config.initializers.api import api
+
 from app.models import *
 import psycopg2
 
@@ -13,17 +16,13 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1qaz2wsx#EDC@127.0.0.1:5432/postgres'
 app.config['JWT_SECRET_KEY'] = 'super-secret'
 
-cors = CORS(app, resources=r'/api/*')
-pss_app = App()
-pss_app.init_app(app)
-
-jwt.init_app(app)
-
+cors.init_app(app, resources=r'/api/*')
 db.init_app(app)
-migrate = Migrate(app, db)
+migrate.init_app(app, db)
+jwt.init_app(app)
+api.init_app(app)
 
 manager = Manager(app)
-
 manager.add_command('dbset', command)
 manager.add_command('db', MigrateCommand)
 

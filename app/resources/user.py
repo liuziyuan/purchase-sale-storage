@@ -1,5 +1,5 @@
-from flask_restful import reqparse, abort, Api, Resource, fields, marshal_with
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+from flask_restful import reqparse, abort, Resource, fields, marshal_with
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from app.models.user import User
 from app.utils.result_code import ResultCode
 
