@@ -8,7 +8,7 @@ user_roles = db.Table('user_roles',
 
 class User(TimestampMixin, db.Model):
     __tablename__ = 'users'
-    name = db.Column(db.String(80), unique=True, nullable=False)
+    username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     sign_in_count = db.Column(db.Integer, default=0)
 
@@ -34,6 +34,9 @@ class User(TimestampMixin, db.Model):
 
     def get_by_id(self, id):
         return self.query.filter_by(id=id).first()
+    
+    def login(self, username, password):
+        return self.query.filter_by(username=username, password=password).first()
 
     @staticmethod
     def create(user):
