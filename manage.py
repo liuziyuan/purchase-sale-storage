@@ -1,7 +1,3 @@
-# from flask import Flask
-from flask_script import Manager, prompt_bool, Command
-from flask_migrate import MigrateCommand
-
 from config.initializers.flask import app
 from config.initializers.cors import cors, cors_resources
 from config.initializers.db import db
@@ -24,7 +20,7 @@ app.config['JWT_SECRET_KEY'] = 'super-secret'
 
 
 # manager.add_command('dbset', command)
-manager.add_command('db', MigrateCommand)
+# manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
     manager.run()
