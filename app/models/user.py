@@ -38,6 +38,9 @@ class User(TimestampMixin, db.Model):
     def login(self, username, password):
         return self.query.filter_by(username=username, password=password).first()
 
+    def get_by_username(self, username):
+        return self.query.filter_by(username=username).first()
+
     @staticmethod
     def create(user):
         db.session.add(user)

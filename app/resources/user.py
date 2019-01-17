@@ -74,13 +74,31 @@ class UserListResources(Resource):
 
 class SessionResources(Resource):
     
+    @jwt_required
+    @marshal_with(resource_fields)
+    def get(self):
+        current_user = get_jwt_identity()
+        user = User().get_by_username(current_user)
+        code = ResultCode.SUCCESS
+        result = { 'user': user, 'code': code}
+        return result, 200
+
     @marshal_with(login_fields)
     def post(self):
         args = parser.parse_args()
         user = User().login(args['username'], args['password'])
+        if not user:
+            abort(401, message="Bad username or password.")
         code = ResultCode.SUCCESS
-        result = { 'user': user, 'code': code, 'token': 'admin' }
+        result = { 'user': user, 'code': code, 'token': create_access_token(identity=user.username) }
         return result, 201
+
+    @jwt_required
+    @marshal_with(resource_fields)
+    def delete(self):
+        code = ResultCode.SUCCESS
+        result = { 'user': None, 'code': code}
+        return result, 200
     
     
 
