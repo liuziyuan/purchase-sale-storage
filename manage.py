@@ -2,9 +2,9 @@ from flask import Flask
 from flask_script import Manager, prompt_bool, Command
 from flask_migrate import Migrate, MigrateCommand
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager
 from app import App
 from config.initializers.database import db, command
+from config.initializers.jwt import jwt
 from app.models import *
 import psycopg2
 
@@ -17,7 +17,8 @@ cors = CORS(app, resources=r'/api/*')
 pss_app = App()
 pss_app.init_app(app)
 
-jwt = JWTManager(app)
+jwt.init_app(app)
+
 db.init_app(app)
 migrate = Migrate(app, db)
 
