@@ -14,3 +14,9 @@ class IdMixin(object):
 class TimestampMixin(IdMixin):
     created_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_on = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class BaseUser(IdMixin):
+    name = db.Column(db.String(30))
+    mobile_tel = db.Column(db.Integer)
+    tel = db.Column(db.Integer)
+    address = db.Column(db.String(255))
