@@ -1,0 +1,16 @@
+default: &default
+  DEBUG: False
+  TESTING: False
+
+development: &development
+  <<: *default
+  DEBUG: True
+  SQLALCHEMY_DATABASE_URI: 'postgresql://postgres:1qaz2wsx#EDC@127.0.0.1:5432/postgres'
+  SQLALCHEMY_TRACK_MODIFICATIONS: True
+  JWT_SECRET_KEY: 'super-secret-dev'
+
+production: &production
+  <<: *default
+  SQLALCHEMY_DATABASE_URI: 'postgresql://postgres:1qaz2wsx#EDC@127.0.0.1:5432/postgres'
+  SQLALCHEMY_TRACK_MODIFICATIONS: True
+  JWT_SECRET_KEY: 'super-secret-prod'
