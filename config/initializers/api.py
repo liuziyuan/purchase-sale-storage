@@ -1,15 +1,26 @@
 from .flask import app
 from flask_restful import Api
-import functools
+from functools import wraps
 api = Api()
 
-def resources(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kw):
-        func(*args, **kw)
-        api.init_app(app)
-    return wrapper
+def inject(func):
+    func()
+    api.init_app(app)
 
+# def resources(func):
+#     @wraps(func)
+#     def wrapper(*args, **kw):
+#         func(*args, **kw)
+#         api.init_app(app)
+#     return wrapper
+
+# class ApiExtended(Api):
+#     def inject(self, func):
+#         func()
+#         self.init_app(app)
+
+
+# api = ApiExtended()
 
 # def resources(func):
 #     @functools.wraps(func)

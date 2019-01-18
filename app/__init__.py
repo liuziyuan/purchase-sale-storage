@@ -1,4 +1,4 @@
-from app.router import *
-from app.models import *
+import app.models
+import app.router
 
 
